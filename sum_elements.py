@@ -1,37 +1,45 @@
-#A poorly written example of a program in Python. It prompts the user for the number of elements to sum, takes those integers as input, and handles some basic error cases
+# Programa para calcular la suma de una lista de números enteros ingresados por el usuario.
+# Refactorizado para seguir buenas prácticas de programación.
 
-MAX = 100
+MAX_ELEMENTS = 100
 
-def calculate_sum(arr):
-   result = 0
-   for num in arr:
-      result += num
-   return result
+def calculate_sum(numbers):
+   """Calcula la suma de una lista de números."""
+   return sum(numbers)
+
+def get_integer_input(prompt):
+   """Solicita al usuario un número entero y valida la entrada."""
+   while True:
+      try:
+         return int(input(prompt))
+      except ValueError:
+         print("Entrada inválida. Por favor, ingrese un número entero.")
+
+def get_numbers_from_user(count):
+   """Solicita al usuario una cantidad específica de números enteros."""
+   numbers = []
+   print(f"Ingrese {count} números enteros:")
+   for i in range(count):
+      number = get_integer_input(f"  Número {i + 1}: ")
+      numbers.append(number)
+   return numbers
 
 def main():
-   try:
-      n = int(input("Enter the number of elements (1-100): "))
-      if not 1 <= n <= MAX:
-            print("Invalid input. Please provide a digit ranging from 1 to 100.")
-            exit(1)
+   """Función principal del programa."""
+   print("Programa para calcular la suma de números enteros.")
+   while True:
+      try:
+         n = get_integer_input(f"Ingrese la cantidad de números a sumar (1-{MAX_ELEMENTS}): ")
+         if 1 <= n <= MAX_ELEMENTS:
+            break
+         print(f"Por favor, ingrese un número entre 1 y {MAX_ELEMENTS}.")
+      except KeyboardInterrupt:
+         print("\nPrograma terminado por el usuario.")
+         return
 
-      arr = []
-
-      print(f"Enter {n} integers:")
-      for _ in range(n):
-            try:
-               arr.append(int(input()))
-            except ValueError:
-               print("Invalid input. Please enter valid integers.")
-               exit(1)
-
-      total = calculate_sum(arr)
-
-      print("Sum of the numbers:", total)
-
-   except KeyboardInterrupt:
-      print("\nProgram terminated by user.")
-      exit(1)
+   numbers = get_numbers_from_user(n)
+   total = calculate_sum(numbers)
+   print(f"La suma de los números ingresados es: {total}")
 
 if __name__ == "__main__":
    main()
