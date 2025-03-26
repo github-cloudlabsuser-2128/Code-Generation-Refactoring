@@ -17,7 +17,7 @@ async function getWeatherByCity(city) {
     } catch (error) {
         console.error('Error al obtener los datos del clima:', error.message);
     }
-}
+} 
 
 // Ejemplo de uso
 getWeatherByCity('Madrid');

@@ -17,7 +17,8 @@ class Calculator {
         }
         return a / b;
     }
-}
+} 
+
 
 // Example usage
 const calculator = new Calculator();
